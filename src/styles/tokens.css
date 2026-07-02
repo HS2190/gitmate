@@ -1,0 +1,53 @@
+/* ============================================================
+   깃메이트 디자인 토큰 (CSS 변수)
+   값 하드코딩 금지 — 컴포넌트는 이 토큰만 참조한다.
+   ============================================================ */
+:root {
+  /* 색 — 중립 */
+  --bg: #ffffff;
+  --surface: #f7f7f5;
+  --ink: #1a1a1a;
+  --sub: #6b6b6b;
+  --mut: #9a9a97;
+  --line: #e6e6e3;
+
+  /* 색 — 강조 (인디고) */
+  --accent: #5b5bd6;
+  --accent-weak: #ececfb;
+
+  /* 색 — 판단 신호 (긍정 "맞아요") */
+  --pos-bg: #e7f3ec;
+  --pos-tx: #1f7a44;
+
+  /* 색 — 경고 (막힘) */
+  --warn-bg: #fbf3e0;
+  --warn-tx: #8a6d1f;
+
+  /* 반경 */
+  --r-card: 14px;
+  --r-ctrl: 11px; /* 버튼/입력 10~12px */
+  --r-chip: 10px;
+
+  /* 그림자 (아주 옅게) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  /* 간격 스케일 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* 타이포 */
+  --font: 'Pretendard', 'Pretendard Variable', -apple-system,
+    BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+
+  /* 레이아웃 */
+  --maxw: 1080px;
+  --bar-h: 60px;
+}

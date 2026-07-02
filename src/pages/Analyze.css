@@ -1,0 +1,137 @@
+/* ============================================================
+   방법3 실시간 분석 화면 전용 스타일
+   토큰(tokens.css)만 참조. 값 하드코딩 최소화.
+   ============================================================ */
+
+/* 실시간 알림 배너 */
+.live-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: var(--accent-weak);
+  color: color-mix(in srgb, var(--accent) 88%, var(--ink));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: var(--r-ctrl);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: var(--sp-4);
+}
+.live-banner--warn {
+  background: var(--warn-bg);
+  color: color-mix(in srgb, var(--warn-tx) 92%, var(--ink));
+  border-color: color-mix(in srgb, var(--warn-tx) 25%, transparent);
+}
+
+/* "실시간 분석" 뱃지 (헤더 우측) */
+.live-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.live-footnote {
+  margin-top: var(--sp-5);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.6;
+}
+
+/* ---- 스켈레톤 (로딩) ---- */
+.rd__card.sk {
+  gap: var(--sp-4);
+}
+.sk__spinnerrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+.sk__label {
+  font-size: 14px;
+  color: var(--sub);
+}
+.sk__spinner {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-weak);
+  border-top-color: var(--accent);
+  animation: sk-spin 0.7s linear infinite;
+}
+@keyframes sk-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sk__line,
+.sk__block {
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--line) 37%,
+    var(--surface) 63%
+  );
+  background-size: 400% 100%;
+  animation: sk-shimmer 1.4s ease infinite;
+}
+.sk__line {
+  height: 14px;
+  width: 100%;
+}
+.sk__line--title {
+  height: 24px;
+  width: 55%;
+}
+.sk__line--sub {
+  height: 14px;
+  width: 35%;
+}
+.sk__line--short {
+  width: 60%;
+}
+.sk__block {
+  height: 72px;
+  width: 100%;
+}
+@keyframes sk-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* 모션 최소화 선호 사용자 배려 (접근성) */
+@media (prefers-reduced-motion: reduce) {
+  .sk__spinner,
+  .sk__line,
+  .sk__block {
+    animation: none;
+  }
+  .sk__spinner {
+    border-top-color: var(--accent);
+  }
+}
+
+@media (max-width: 480px) {
+  .rd__header .live-badge {
+    align-self: flex-start;
+  }
+}

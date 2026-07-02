@@ -1,0 +1,85 @@
+.list__head {
+  margin-bottom: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.list__title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.list__subtitle {
+  font-size: 15px;
+  color: var(--sub);
+  max-width: 62ch;
+}
+.list__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+  flex-wrap: wrap;
+}
+.list__count {
+  font-size: 14px;
+  color: var(--sub);
+  font-weight: 600;
+}
+
+.list__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+
+.list__searchterm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* 빈 상태 */
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  padding: var(--sp-7) var(--sp-5);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.empty__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.empty__desc {
+  font-size: 14px;
+  color: var(--sub);
+  margin-bottom: var(--sp-3);
+}
+.empty__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: var(--sp-3);
+}
+
+@media (max-width: 720px) {
+  .list__cards {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .list__title {
+    font-size: 23px;
+  }
+}

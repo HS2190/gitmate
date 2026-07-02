@@ -1,0 +1,56 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--r-ctrl);
+  border: 1px solid transparent;
+  font-weight: 600;
+  line-height: 1;
+  transition: background 0.14s ease, border-color 0.14s ease,
+    color 0.14s ease, transform 0.08s ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--md {
+  padding: 11px 16px;
+  font-size: 14px;
+  min-height: 44px; /* 터치 타겟 */
+}
+.btn--lg {
+  padding: 14px 22px;
+  font-size: 15px;
+  min-height: 48px;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn--primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 88%, #000);
+}
+
+.btn--secondary {
+  background: var(--bg);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn--secondary:hover:not(:disabled) {
+  border-color: var(--mut);
+  background: var(--surface);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--accent);
+}
+.btn--ghost:hover:not(:disabled) {
+  background: var(--accent-weak);
+}

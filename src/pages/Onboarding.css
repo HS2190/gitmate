@@ -1,0 +1,192 @@
+.onb__hero {
+  margin-bottom: var(--sp-6);
+}
+.onb__title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.onb__subtitle {
+  margin-top: var(--sp-2);
+  font-size: 16px;
+  color: var(--sub);
+}
+.onb__intro-link {
+  margin-top: var(--sp-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--sub);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.14s ease, color 0.14s ease;
+}
+.onb__intro-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.onb__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+.onb__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+/* ---- 패널 공통 ---- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.panel--main {
+  background: var(--bg);
+  gap: var(--sp-4);
+}
+
+.panel__badge {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-weak);
+  padding: 3px 10px;
+  border-radius: var(--r-chip);
+}
+.panel__title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.panel__desc {
+  font-size: 14px;
+  color: var(--sub);
+  margin-top: -4px;
+}
+.panel__live {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0;
+}
+.panel__demo {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--mut);
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0;
+}
+
+/* ---- 방법1 필드 ---- */
+.field {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.field__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sub);
+  padding: 0;
+}
+.field__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.field__hint {
+  font-size: 13px;
+  color: var(--mut);
+  margin-top: -4px;
+}
+
+.onb__cta {
+  align-self: flex-start;
+  margin-top: var(--sp-2);
+}
+
+/* ---- 입력 ---- */
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-ctrl);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  transition: border-color 0.14s ease;
+}
+.input::placeholder {
+  color: var(--mut);
+}
+.input:focus {
+  border-color: var(--accent);
+}
+
+.searchbar {
+  display: flex;
+  gap: 8px;
+}
+.searchbar .input {
+  flex: 1;
+}
+.searchbar .btn {
+  flex-shrink: 0;
+}
+
+.panel__examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---- 반응형 ---- */
+@media (max-width: 860px) {
+  .onb__grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .onb__title {
+    font-size: 26px;
+  }
+  .panel {
+    padding: var(--sp-4);
+  }
+  .onb__cta {
+    align-self: stretch;
+  }
+}
