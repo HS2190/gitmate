@@ -1,4 +1,5 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { Onboarding } from './pages/Onboarding'
 import { Recommend } from './pages/Recommend'
 import { Search } from './pages/Search'
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/similar/:id" element={<Similar />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <Analytics />
     </HashRouter>
   )
 }
