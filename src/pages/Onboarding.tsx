@@ -12,6 +12,7 @@ import {
 } from '../data/options'
 import type { Role, Task, Purpose, Difficulty } from '../data/resources'
 import { criteriaToQuery, saveCriteria } from '../lib/criteria'
+import { trackEvent } from '../lib/analytics'
 import './Onboarding.css'
 
 const SEARCH_EXAMPLES = ['영상 자막', '무드보드 이미지', '문서 자동화']
@@ -64,12 +65,18 @@ export function Onboarding() {
   const onRecommend = () => {
     const c = { role, tasks, purpose, difficulty }
     saveCriteria(c)
+    trackEvent('select_method', {
+      method: 'recommend',
+      role: role ?? '(none)',
+      tasks: tasks.length,
+    })
     navigate(`/recommend?${criteriaToQuery(c)}`)
   }
 
   const onSearch = (q: string) => {
     const query = q.trim()
     if (!query) return
+    trackEvent('select_method', { method: 'search', keyword: query.slice(0, 100) })
     navigate(`/search?q=${encodeURIComponent(query)}`)
   }
 
@@ -80,6 +87,7 @@ export function Onboarding() {
     // 역할·목적 맞춤 정리를 받는다(안 골랐어도 동작).
     const c = { role, tasks, purpose, difficulty }
     saveCriteria(c)
+    trackEvent('select_method', { method: 'analyze' })
     const q = criteriaToQuery(c)
     navigate(`/analyze?url=${encodeURIComponent(v)}${q ? `&${q}` : ''}`)
   }

@@ -6,6 +6,7 @@ import { Button } from '../components/Button'
 import { MatchBadge } from '../components/MatchBadge'
 import { readCriteria } from '../lib/criteria'
 import { requestAnalyze, type LiveResult } from '../lib/analyzeClient'
+import { trackEvent } from '../lib/analytics'
 import type { Role } from '../data/resources'
 import './ResourceDetail.css'
 import './Analyze.css'
@@ -53,9 +54,11 @@ export function Analyze() {
       return
     }
     setPhase({ kind: 'loading' })
+    trackEvent('analyze_submit', { repo: url.slice(0, 100) })
     requestAnalyze(url, role, purpose).then((res) => {
       if (!alive) return
       if ('fallback' in res) {
+        trackEvent('analyze_result', { outcome: 'fallback', reason: res.reason })
         setPhase({
           kind: 'fallback',
           reason: res.reason,
@@ -63,6 +66,7 @@ export function Analyze() {
           url,
         })
       } else {
+        trackEvent('analyze_result', { outcome: 'live' })
         setPhase({ kind: 'live', result: res })
       }
     })
