@@ -4,16 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- Google Analytics 4 -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LXH7JET3M"></script>
     <script>
       window.dataLayer = window.dataLayer || []
       function gtag() {
         dataLayer.push(arguments)
       }
-      gtag('js', new Date())
-      gtag('config', 'G-2LXH7JET3M', { send_page_view: false })
+      // 로컬에서는 config 자체를 호출하지 않는다.
+      // send_page_view:false는 page_view만 막을 뿐, config 호출은 그것만으로도
+      // session_start·first_visit를 전송한다. vite preview는 프로덕션 빌드라
+      // 스니펫이 살아 있어, 이 가드가 없으면 내 확인 트래픽이 페이지뷰 없는
+      // 세션으로 집계되어 이탈률과 세션 시간을 망친다.
+      if (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
+        gtag('js', new Date())
+        // 해시 라우팅이라 자동 페이지뷰는 끄고, 라우트가 바뀔 때마다 직접 보낸다.
+        gtag('config', 'G-2LXH7JET3M', { send_page_view: false })
+      }
     </script>
+    <!-- End Google tag -->
     <meta
       name="description"
       content="깃메이트 — GitHub 자료를 한국어 핵심 + 내 상황 기준 적용까지 정리해, 다시 안 묻게 합니다."

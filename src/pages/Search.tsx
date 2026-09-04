@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { TopBar } from '../components/TopBar'
 import { Chip } from '../components/Chip'
 import { Button } from '../components/Button'
 import { ResourceCard } from '../components/ResourceCard'
 import { searchByKeyword } from '../lib/recommend'
+import { trackEvent } from '../lib/analytics'
 import './List.css'
 
 const SUGGESTIONS = ['자막', '이미지', '자동화', '문서 변환', '화이트보드']
@@ -19,6 +20,16 @@ export function Search() {
   const [seed, setSeed] = useState(0)
 
   const results = useMemo(() => searchByKeyword(q, seed), [q, seed])
+
+  // 검색도 결과 건수를 남긴다 — 빈 결과로 이탈하는 키워드를 찾기 위해.
+  useEffect(() => {
+    if (!q) return
+    trackEvent('search_results', {
+      keyword: q.slice(0, 100),
+      result_count: results.length,
+      reshuffled: seed > 0,
+    })
+  }, [q, results, seed])
 
   const go = (term: string) =>
     navigate(`/search?q=${encodeURIComponent(term)}`)

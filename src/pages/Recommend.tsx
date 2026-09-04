@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { TopBar } from '../components/TopBar'
 import { Chip } from '../components/Chip'
@@ -7,6 +7,7 @@ import { ResourceCard, buildReason } from '../components/ResourceCard'
 import { readCriteria } from '../lib/criteria'
 import { recommend } from '../lib/recommend'
 import { emojiFor } from '../data/options'
+import { trackEvent } from '../lib/analytics'
 import { RESOURCES } from '../data/resources'
 import './List.css'
 
@@ -19,6 +20,18 @@ export function Recommend() {
     () => recommend(criteria, seed),
     [criteria, seed],
   )
+
+  // 추천 결과가 실제로 몇 건 나왔는지 남긴다.
+  // select_method(방법 선택)와 analyze_result(분석 완료) 사이가 계측 공백이라
+  // 결과 0건으로 되돌아가는 건지, 결과를 보고도 안 눌러보는 건지 구분되지 않았다.
+  useEffect(() => {
+    trackEvent('recommend_results', {
+      result_count: results.length,
+      role: criteria.role ?? '(none)',
+      task_count: criteria.tasks.length,
+      reshuffled: seed > 0,
+    })
+  }, [results, criteria, seed])
 
   const linkQuery = search.replace(/^\?/, '')
   const taskLabel = criteria.tasks[0] ?? '내 상황'
