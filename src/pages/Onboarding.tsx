@@ -68,7 +68,9 @@ export function Onboarding() {
     trackEvent('select_method', {
       method: 'recommend',
       role: role ?? '(none)',
-      tasks: tasks.length,
+      // recommend_results와 같은 이름을 쓴다 — 같은 값에 이름이 둘이면
+      // GA 맞춤 측정기준 슬롯을 두 개 잡아먹고 보고서도 갈린다.
+      task_count: tasks.length,
     })
     navigate(`/recommend?${criteriaToQuery(c)}`)
   }
