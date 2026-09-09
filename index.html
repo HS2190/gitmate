@@ -16,10 +16,26 @@
       // session_start·first_visit를 전송한다. vite preview는 프로덕션 빌드라
       // 스니펫이 살아 있어, 이 가드가 없으면 내 확인 트래픽이 페이지뷰 없는
       // 세션으로 집계되어 이탈률과 세션 시간을 망친다.
+      // 해시 라우트를 해시 없는 정규 URL로 만든다.
+      // GA4는 pagePath를 page_location에서 해시를 떼고 만들기 때문에, 그냥 두면
+      // "https://호스트/#/recommend"가 전부 "/"로 접힌다.
+      function canonicalUrl() {
+        var route = location.hash.replace(/^#/, '') || '/'
+        var base = location.pathname.replace(/index\.html$/, '').replace(/\/$/, '')
+        return location.origin + base + route
+      }
       if (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
         gtag('js', new Date())
         // 해시 라우팅이라 자동 페이지뷰는 끄고, 라우트가 바뀔 때마다 직접 보낸다.
-        gtag('config', 'G-2LXH7JET3M', { send_page_view: false })
+        //
+        // page_location을 여기 config에 실어야 한다. 앱(analytics.ts)의 gtag('set')은
+        // React가 마운트된 뒤에야 돌아서, 그 이전에 발생하는 session_start·first_visit·
+        // 초기 scroll이 정규화되지 않은 URL로 나간다. config 파라미터는 이후 이 측정
+        // ID로 보내는 모든 이벤트의 기본값이 되므로 마운트 전 이벤트까지 덮는다.
+        gtag('config', 'G-2LXH7JET3M', {
+          send_page_view: false,
+          page_location: canonicalUrl(),
+        })
       }
     </script>
     <!-- End Google tag -->
